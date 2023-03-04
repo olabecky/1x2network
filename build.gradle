@@ -1,0 +1,55 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version "${springDependecyManagementVersion}"
+}
+
+allprojects {
+	group = 'bet-data-service'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '17'
+	repositories {
+		mavenCentral()
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'groovy'
+
+	compileJava.options.encoding = 'UTF-8'
+
+	test {
+		useJUnitPlatform()
+	}
+
+	dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.kafka:spring-kafka'
+	implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonCoreVersion}"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.projectlombok:lombok'
+
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+	}
+}
+
+//dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.springframework.kafka:spring-kafka'
+//	implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonCoreVersion}"
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+////	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+//	implementation 'org.projectlombok:lombok'
+//
+//	runtimeOnly 'com.mysql:mysql-connector-j'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testImplementation 'org.springframework.kafka:spring-kafka-test'
+//}
+//
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}

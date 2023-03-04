@@ -1,0 +1,112 @@
+{
+  "bets": [
+    {
+      "id": 1,
+      "numbets": 5,
+      "game": "roulette",
+      "stake": 100.00,
+      "returns": 0.00,
+      "clientid": 1,
+      "date": "2020-05-17"
+    },
+    {
+      "id": 2,
+      "numbets": 5,
+      "game": "baccarat",
+      "stake": 1000.00,
+      "returns": 2000.00,
+      "clientid": 1,
+      "date": "2020-05-17"
+    },
+    {
+      "id": 3,
+      "numbets": 8,
+      "game": "blackjack",
+      "stake": 1550.00,
+      "returns": 1600.00,
+      "clientid": 1,
+      "date": "2020-05-17"
+    },
+    {
+      "id": 4,
+      "numbets": 5,
+      "game": "roulette",
+      "stake": 1250.00,
+      "returns": 1200.00,
+      "clientid": 2,
+      "date": "2020-05-17"
+    },
+    {
+      "id": 5,
+      "numbets": 5,
+      "game": "baccarat",
+      "stake": 200.00,
+      "returns": 400.00,
+      "clientid": 2,
+      "date": "2020-05-17"
+    },
+    {
+      "id": 6,
+      "numbets": 5,
+      "game": "blackjack",
+      "stake": 100.00,
+      "returns": 0.00,
+      "clientid": 2,
+      "date": "2020-05-17"
+    },
+    {
+      "id": 7,
+      "numbets": 3,
+      "game": "roulette",
+      "stake": 500.00,
+      "returns": 0.00,
+      "clientid": 1,
+      "date": "2020-05-16"
+    },
+    {
+      "id": 8,
+      "numbets": 10,
+      "game": "baccarat",
+      "stake": 1000.00,
+      "returns": 2000.00,
+      "clientid": 1,
+      "date": "2020-05-16"
+    },
+    {
+      "id": 9,
+      "numbets": 8,
+      "game": "blackjack",
+      "stake": 1550.00,
+      "returns": 1600.00,
+      "clientid": 1,
+      "date": "2020-05-16"
+    },
+    {
+      "id": 10,
+      "numbets": 5,
+      "game": "roulette",
+      "stake": 1250.00,
+      "returns": 1200.00,
+      "clientid": 2,
+      "date": "2020-05-16"
+    },
+    {
+      "id": 11,
+      "numbets": 2,
+      "game": "baccarat",
+      "stake": 400.00,
+      "returns": 800.00,
+      "clientid": 2,
+      "date": "2020-05-16"
+    },
+    {
+      "id": 12,
+      "numbets": 1,
+      "game": "blackjack",
+      "stake": 100.00,
+      "returns": 100.00,
+      "clientid": 2,
+      "date": "2020-05-16"
+    }
+  ]
+}

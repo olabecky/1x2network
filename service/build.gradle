@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+repositories {
+    mavenLocal()
+    gradlePluginPortal()
+}
+dependencies {
+    implementation project(':domain')
+
+    implementation 'org.springframework:spring-context'
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+    implementation 'org.springframework.data:spring-data-jpa'
+    implementation 'org.springframework.boot:spring-boot'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.jodd:jodd-all:5.1.0-20190624'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    testImplementation 'org.springframework:spring-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
