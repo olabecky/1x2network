@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "bet")
+@Table(name = "bet", indexes = @Index(name = "game_index", columnList = "game"))
 public class BetEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +17,9 @@ public class BetEntity {
     private BigDecimal stake;
     private BigDecimal returns;
     private Long clientId;
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date betDate;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate betDate;
 
     public Long getId() {
         return id;
@@ -70,11 +69,11 @@ public class BetEntity {
         this.clientId = clientId;
     }
 
-    public Date getBetDate() {
+    public LocalDate getBetDate() {
         return betDate;
     }
 
-    public void setBetDate(Date betDate) {
+    public void setBetDate(LocalDate betDate) {
         this.betDate = betDate;
     }
 }

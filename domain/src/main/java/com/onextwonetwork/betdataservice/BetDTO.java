@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class BetDTO {
     private final Long id;
@@ -14,7 +14,7 @@ public class BetDTO {
     private final BigDecimal returns;
     private final Long clientId;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private final Date betDate;
+    private final LocalDate betDate;
 
     public BetDTO(Builder builder){
         this.id = builder.id;
@@ -28,7 +28,7 @@ public class BetDTO {
     public BetDTO(@JsonProperty("id")Long id,
                   @JsonProperty("numbets")Long numbets,
                   @JsonProperty("game")String game,
-                  @JsonProperty("stake")BigDecimal stake, @JsonProperty("returns")BigDecimal returns, @JsonProperty("clientId")Long clientId, @JsonProperty("betDate")Date betDate) {
+                  @JsonProperty("stake")BigDecimal stake, @JsonProperty("returns")BigDecimal returns, @JsonProperty("clientId")Long clientId, @JsonProperty("betDate")LocalDate betDate) {
         this.id = id;
         this.numbets = numbets;
         this.game = game;
@@ -62,7 +62,7 @@ public class BetDTO {
         return clientId;
     }
 
-    public Date getBetDate() {
+    public LocalDate getBetDate() {
         return betDate;
     }
     public static Builder aBetDTO() {
@@ -75,7 +75,7 @@ public class BetDTO {
         private BigDecimal stake;
         private BigDecimal returns;
         private Long clientId;
-        private Date betDate;
+        private LocalDate betDate;
 
         private Builder() {
         }
@@ -106,7 +106,7 @@ public class BetDTO {
             return this;
         }
 
-        public Builder betDate(Date betDate) {
+        public Builder betDate(LocalDate betDate) {
             this.betDate = betDate;
             return this;
         }

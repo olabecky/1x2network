@@ -1,5 +1,6 @@
 package com.onextwonetwork.betdataservice;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,16 +15,19 @@ public class BetController {
 
     private final int SUCCESS_RESPONSE_CODE = 0;
     private final String SUCCESS_RESPONSE_MESSAGE = "%d records found";
+    private final String LOAD_BETS_SUCCESS_RESPONSE_MESSAGE = "Bets loaded successfully";
     private final int NO_RECORDS_RESPONSE_CODE = 1;
     private final String NO_RECORDS_RESPONSE_MESSAGE = "search did not return any results";
 
     private final BetService betService;
 
+    ObjectMapper mapper = new ObjectMapper();
+
     public BetController(BetService betService) {
         this.betService = betService;
     }
 
-    @GetMapping(produces = {"text/plain", "application/json"})
+    @GetMapping
     public ResponseEntity<BetResponse> searchBets(
             @RequestParam(name = "game", required = false) String game,
             @RequestParam(name = "clientId", required = false) Long clientId,
@@ -31,17 +35,18 @@ public class BetController {
             @RequestParam(name = "endDate", required = false) String endDate,
             @RequestParam(name = "page") int page,
             @RequestParam(name = "size") int size){
+
         List<BetDTO> response = betService.getBetsByParams(game, clientId, startDate, endDate, page, size);
+
         if(response.isEmpty()){
-            return ResponseEntity.ok(new BetResponse(Collections.emptyList(), NO_RECORDS_RESPONSE_CODE, NO_RECORDS_RESPONSE_MESSAGE));
+            return ResponseEntity.ok(BetResponse.aBetResponse().bets(Collections.emptyList()).responseCode(NO_RECORDS_RESPONSE_CODE).responseMessage(NO_RECORDS_RESPONSE_MESSAGE).build());
         }
-        return ResponseEntity.ok(new BetResponse(response, SUCCESS_RESPONSE_CODE, String.format(SUCCESS_RESPONSE_MESSAGE, response.size())));
+        return ResponseEntity.ok(BetResponse.aBetResponse().bets(response).responseCode(SUCCESS_RESPONSE_CODE).responseMessage(String.format(SUCCESS_RESPONSE_MESSAGE, response.size())).build());
     }
 
     @GetMapping(value="/load")
-    public ResponseEntity<String> loadBets(){
+    public ResponseEntity<BetResponse> loadBets(){
         betService.loadBets();
-        return ResponseEntity.ok("Bets loaded");
+        return ResponseEntity.ok(BetResponse.aBetResponse().responseCode(SUCCESS_RESPONSE_CODE).responseMessage(LOAD_BETS_SUCCESS_RESPONSE_MESSAGE).build());
     }
-
 }

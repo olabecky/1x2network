@@ -16,6 +16,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +53,7 @@ public class BetLoader {
                                     .stake(b.getStake())
                                     .returns(b.getReturns())
                                     .clientId(b.getClientId())
-                                    .betDate(sdf.parse(b.getDate()))
+                                    .betDate(sdf.parse(b.getDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
                                     .build();
                         } catch (ParseException e) {
                             throw new RuntimeException(e);

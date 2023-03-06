@@ -5,8 +5,10 @@ import com.onextwonetwork.betdataservice.BetDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;
+import jodd.util.StringUtil;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,11 +39,10 @@ public class BetCustomRepository {
         Path<BigDecimal> stakePath = root.get("stake");
         Path<BigDecimal> returnsPath = root.get("returns");
 
-
         List<Predicate> predicates = new ArrayList<>();
 
-        if(game != null){
-            predicates.add(cb.like(gamePath, game));
+        if(StringUtil.isNotBlank(game)){
+            predicates.add(cb.like(gamePath, "%"+game+"%"));
         }
 
         if(clientId != null){

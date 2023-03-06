@@ -7,10 +7,10 @@ import com.onextwonetwork.betdataservice.dao.BetCustomRepository;
 import com.onextwonetwork.betdataservice.dao.BetEntity;
 import com.onextwonetwork.betdataservice.dao.BetRepository;
 import com.onextwonetwork.betdataservice.util.BetLoader;
+import jodd.util.StringUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -30,27 +30,31 @@ public class BetServiceImpl implements BetService{
 
     private final BetLoader betLoader;
 
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
 
-    public BetServiceImpl(BetRepository betRepository, BetCustomRepository betCustomRepository, BetConverter betConverter, MessageSenderService messageSenderService, BetLoader betLoader) {
+    public BetServiceImpl(BetRepository betRepository, BetCustomRepository betCustomRepository, BetConverter betConverter, MessageSenderService messageSenderService, BetLoader betLoader, ObjectMapper mapper) {
         this.betRepository = betRepository;
         this.betCustomRepository = betCustomRepository;
         this.betConverter = betConverter;
         this.messageSenderService = messageSenderService;
         this.betLoader = betLoader;
+        this.mapper = mapper;
     }
 
     @Override
     public List<BetDTO> getBetsByParams(String game, Long clientId, String startDateStr, String endDateStr, int page, int pageSize) {
-        Date startDate, endDate;
-        try{
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            startDate = sdf.parse(startDateStr);
-            endDate = sdf.parse(endDateStr);
-        }catch (Exception ex){
-            throw new IllegalArgumentException("Date format mismatch. Expected format: yyyy-MM-dd");
+        Date startDate=null, endDate=null;
+        if(StringUtil.isNotBlank(startDateStr) && StringUtil.isNotBlank(endDateStr)){
+            try{
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                startDate = sdf.parse(startDateStr);
+                endDate = sdf.parse(endDateStr);
+            }catch (Exception ex){
+                throw new IllegalArgumentException("Date format mismatch. Expected format: yyyy-MM-dd");
+            }
         }
-        return betCustomRepository.searchBets(PageRequest.of(page, pageSize), game, (long) clientId, startDate, endDate);
+
+        return betCustomRepository.searchBets(PageRequest.of(page, pageSize), game, clientId, startDate, endDate);
     }
 
     @Override
@@ -64,6 +68,7 @@ public class BetServiceImpl implements BetService{
         BetEntity savedBet = betRepository.save(betConverter.convert(bet));
         BetDTO betResponse = betConverter.convert(savedBet);
         try {
+//            ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
             messageSenderService.sendMessage(mapper.writeValueAsString(betResponse));
         } catch (JsonProcessingException e) {
             LOGGER.log(Level.SEVERE, "Unable to parse message [%s] due to error", e);

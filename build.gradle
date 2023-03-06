@@ -1,6 +1,5 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version "${springBootVersion}"
 	id 'io.spring.dependency-management' version "${springDependecyManagementVersion}"
 }
 
@@ -11,6 +10,7 @@ allprojects {
 	repositories {
 		mavenCentral()
 	}
+
 }
 
 subprojects {
@@ -28,7 +28,6 @@ subprojects {
 	implementation 'org.springframework.kafka:spring-kafka'
 	implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonCoreVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.projectlombok:lombok'
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
@@ -36,20 +35,3 @@ subprojects {
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
 	}
 }
-
-//dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//	implementation 'org.springframework.kafka:spring-kafka'
-//	implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonCoreVersion}"
-//	implementation 'org.springframework.boot:spring-boot-starter-web'
-////	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-//	implementation 'org.projectlombok:lombok'
-//
-//	runtimeOnly 'com.mysql:mysql-connector-j'
-//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//	testImplementation 'org.springframework.kafka:spring-kafka-test'
-//}
-//
-//tasks.named('test') {
-//	useJUnitPlatform()
-//}

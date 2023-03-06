@@ -16,6 +16,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.jodd:jodd-all:5.1.0-20190624'
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     testImplementation 'org.springframework:spring-test'
