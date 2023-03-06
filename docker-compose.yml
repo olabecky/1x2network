@@ -10,7 +10,7 @@ services:
     volumes:
       - ./:/1x2network
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/bet_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://bet-service-app:3306/bet_db?createDatabaseIfNotExist=true
       MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_PASSWORD: bet_db
