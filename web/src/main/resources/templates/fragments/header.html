@@ -28,20 +28,21 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Menu
                     </a>
+
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/bet">Bet</a>
+                        <a class="dropdown-item" href="/">Bet</a>
+                        <a class="dropdown-item" href="http://localhost:9000/topic/bet_detail/messages?partition=0&offset=0&count=100&keyFormat=DEFAULT&format=DEFAULT" target="_blank">View topic after loading bets</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
+            <button id="load-bets" class="btn btn-primary" type="submit">Load bets</button>
             <form id="searchForm" class="searchForm form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search by game" aria-label="Search">
             </form>
             <button id="search-form" class="searchForm btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-            <button id="load-bets" class="btn btn-primary" type="submit">Load bets</button>
         </div>
     </nav>
 
